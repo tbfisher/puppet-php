@@ -2,7 +2,7 @@
 
 A simple module for installing PHP on ubuntu trusty and precise.
 
-## Usage
+## Install and Configure PHP
 
     class { '::php':
       sapi => ['cli', 'fpm'],
@@ -20,3 +20,13 @@ A simple module for installing PHP on ubuntu trusty and precise.
       package => 'xdebug',
       value => 1,
     }
+
+## Functions
+
+### `to_php`
+
+Takes a hash, array, or scaler and outputs its literal expression in php.
+
+    <% @drupal_settings.each do |key, val| -%>
+    $settings['<%= key %>'] = <%= scope.function_to_php([val]) %>;
+    <% end -%>

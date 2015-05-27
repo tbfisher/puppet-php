@@ -17,7 +17,7 @@ class php (
     $php_mod_dir = 'apc'
   }
   else {
-    notice("Unexpected OS ${operatingsystem} ${lsbdistcodename}")
+    fail("Unexpected OS ${operatingsystem} ${lsbdistcodename}")
   }
 
   package { [

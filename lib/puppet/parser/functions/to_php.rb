@@ -2,7 +2,7 @@ def var_export(val)
 
     if val.class == String
 
-        val = val.gsub(/['\\]/, '\\\\\0')
+        val = val.gsub(/'/, '\\\\\0')
         "'#{val}'"
 
     elsif val.class == Array

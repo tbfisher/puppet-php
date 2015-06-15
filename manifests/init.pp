@@ -27,14 +27,25 @@ class php (
     ] :
   }
 
-  if member($sapi, 'cli') {
-    package { 'php5-cli': }
-  }
   if member($sapi, 'apache2') {
+    if member($sapi, 'cli') {
+      package { 'php5-cli': }
+    }
     package { 'libapache2-mod-php5': }
   }
   if member($sapi, 'fpm') {
-    package { 'php5-fpm': }
+    if member($sapi, 'cli') {
+      package { 'php5-cli':
+        require => Package['php5-fpm'],
+      }
+    }
+    package { 'php5-fpm':
+      before => [
+        Package['php5'],
+        Package['php5-common'],
+        Package['php5-dev'],
+      ],
+    }
   }
 
 }

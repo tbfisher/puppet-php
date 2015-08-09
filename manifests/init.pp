@@ -106,6 +106,22 @@ class php (
         Package['php5-dev'],
       ],
     }
+
+    # needed for 12.04, later versions do this.
+    create_resources(file_line, {
+      'php fpm pool www listen.owner' => {
+        line  => 'listen.owner = www-data',
+        match => '^;?listen.owner = www-data',
+      },
+      'php fpm pool www listen.group' => {
+        line  => 'listen.group = www-data',
+        match => '^;?listen.group = www-data',
+      }
+    }, {
+      path  => '/etc/php5/fpm/pool.d/www.conf',
+      require => Package['php5-fpm'],
+      notify => Service['php5-fpm'],
+    })
   }
 
 }

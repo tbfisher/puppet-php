@@ -12,9 +12,7 @@ def var_export(val)
 
     elsif val.class == Hash
 
-        val = val
-            .collect{|k,v| var_export(k) + ' => ' + var_export(v) }
-            .join(', ')
+        val = val.collect{|k,v| var_export(k) + ' => ' + var_export(v) }.join(', ')
         "array(#{val})"
 
     # checking whether foo is a boolean

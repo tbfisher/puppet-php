@@ -24,10 +24,14 @@ def var_export(val)
 
         val.to_s()
 
+    elsif val == :undef
+
+        "NULL"
+
     else
 
-        raise(Puppet::ParseError, 'to_php(): Could not convert ' +
-            val.to_s())
+        raise(Puppet::ParseError, 'to_php(): Could not convert value:' +
+            val.inspect)
 
     end
 end
